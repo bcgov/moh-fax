@@ -1,1 +1,0 @@
-# Fax automation with AutoIt.
