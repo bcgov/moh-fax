@@ -67,12 +67,12 @@ Func ClickMarkButton($oMarkButton)
 EndFunc ;==> ClickMarkButton
 
 Func ChooseEnvironment()
-    Local $hGUI = GUICreate("Choose environment", 280, 80)
+    Local $hGUI = GUICreate("Choose environment", 205, 80)
 
     ; Create button controls.
-    Local $btnDev = GUICtrlCreateButton("Run on Dev", 10, 30)
-    Local $btnStaging = GUICtrlCreateButton("Run on Staging", 80, 30)
-    Local $btnProd = GUICtrlCreateButton("Run on Production", 170, 30)
+    ;~ Local $btnDev = GUICtrlCreateButton("Run on Dev", 10, 30)
+    Local $btnStaging = GUICtrlCreateButton("Run on Staging", 10, 30)
+    Local $btnProd = GUICtrlCreateButton("Run on Production", 100, 30)
     
     ; Display the GUI.
     GUISetState(@SW_SHOW, $hGUI)
@@ -90,9 +90,9 @@ Func ChooseEnvironment()
                 $urlDomain = "https://bchealth--staging--c.visualforce.com/"
                 ExitLoop
 
-            Case $btnDev
-                $urlDomain = "https://bchealth--fax--c.visualforce.com/"
-                ExitLoop
+            ;~ Case $btnDev
+            ;~     $urlDomain = "https://bchealth--fax--c.visualforce.com/"
+            ;~     ExitLoop
 
             Case $GUI_EVENT_CLOSE
                 ExitLoop
