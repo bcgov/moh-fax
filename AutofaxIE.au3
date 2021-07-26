@@ -18,7 +18,7 @@ AutoItSetOption("WinTitleMatchMode",2)
 _WinAPI_SetDefaultPrinter ( "AccuRoute Printer" )
 
 ;	open log file for this session
-$sLogFilesFolderLocation = "\\kiwi\FaxFiles\SAW\SF AutoIT\Logs"
+$sLogFilesFolderLocation = "\\kiwi\FaxFiles\SAW\SF AutoIT\Logs\"
 $tTime = _Date_Time_GetSystemTime()
 $sLogFileLocation = $sLogFilesFolderLocation & @UserName & "_" & StringReplace(StringReplace(StringReplace(_Date_Time_SystemTimeToDateTimeStr($tTime),"/","_")," ","_"),":","_") & ".txt"
 Local $hLogFile = FileOpen($sLogFileLocation, 1)
