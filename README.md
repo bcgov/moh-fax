@@ -21,3 +21,9 @@ Fax automation for MoH SAT Application
 Right-click on AutoIt from your taskbar and select *Exit*.
 
 <img src="https://imgur.com/DOht2Vb.png" width="120">
+
+
+**TIPS**
+- Close any non-essential apps running in the background.
+- In Windows system settings, change Default apps for Web browser to Google Chrome.
+- Disable compatibility view. In Internet Exploer, open Settings > Compatibility View Settings, and uncheck "Display intranet sites in Compatibility View". 
