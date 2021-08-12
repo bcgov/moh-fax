@@ -69,7 +69,7 @@ Func HandleTableRow($oRow)
     Local $oPdfLink = _IETagNameGetCollection($oRow, 'a', 0)
     _IEAction($oPdfLink, 'click')
 
-    Sleep(3000)
+    WinWaitActive("Adobe")
 
     ; Sent "CTRL+P" to print
     Send('^p')
