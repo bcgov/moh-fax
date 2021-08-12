@@ -61,7 +61,7 @@ FileSetAttrib($sLogFileLocation,"+R")
 Func HandleTableRow($oRow)
     ; Get ref to input element containing the fax number.
     $oFaxInput = _IETagNameGetCollection($oRow, 'input', 0)
-    $faxNumber = StringReplace(StringReplace(StringReplace($oFaxInput.value,"+",""),"(",""),")","")
+    $faxNumber = StringRegExpReplace($oFaxInput.value,"[^0-9]", "")
 
 		_FileWriteLog($hLogFile, "Process fax to number " & $faxNumber)		;	would be nice to add here the case number
 
