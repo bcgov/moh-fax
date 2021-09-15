@@ -63,7 +63,9 @@ Func HandleTableRow($oRow)
     $oFaxInput = _IETagNameGetCollection($oRow, 'input', 0)
     $faxNumber = StringRegExpReplace($oFaxInput.value,"[^0-9]", "")
 
-		_FileWriteLog($hLogFile, "Process fax to number " & $faxNumber)		;	would be nice to add here the case number
+    _FileWriteLog($hLogFile, "Process fax to number " & $faxNumber)		;	would be nice to add here the case number
+
+    WinClose("Adobe")
 
     ; Get ref to PDF link in row and click
     Local $oPdfLink = _IETagNameGetCollection($oRow, 'a', 0)
@@ -139,21 +141,21 @@ Func PrintPdf($faxNumber)
 	WinWaitActive("Create Distribution")
 	Sleep(200)
 
-; Enter $faxNumber on "To" field.
+    ; Enter $faxNumber on "To" field.
 	Send($faxNumber)
 	Send("{TAB 3}")	; enter TAB three times to advance to the correct field for next entry
 	Send("Notification From Ministry of Health - Special Authority Program")	;	add text to Subject line
 
-; Click "Send" on page.
+    ; Click "Send" on page.
 	ClickLink("Send")
 	Sleep(1000)
 
-;    Close the tab
+    ; Close the tab
     Send("^w")
     WinWaitClose("Create Distribution") ; Wait for Accuroute prompt to close when "send" is clicked.
 	Sleep(200)
 
-;    return success sending the fax (for now we expect that fax will be sent successfully)
+    ; return success sending the fax (for now we expect that fax will be sent successfully)
     Return "yes"
 EndFunc ;==> PrintPdf
 
