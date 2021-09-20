@@ -64,8 +64,8 @@ Func HandleTableRow($oRow)
     $faxNumber = StringRegExpReplace($oFaxInput.value,"[^0-9]", "")
 
     _FileWriteLog($hLogFile, "Process fax to number " & $faxNumber)		;	would be nice to add here the case number
-
-    ProcessClose("AcroRd32.exe")
+    
+    ProcessClose("AdobeARM.exe")
 
     ; Get ref to PDF link in row and click
     Local $oPdfLink = _IETagNameGetCollection($oRow, 'a', 0)
@@ -75,7 +75,7 @@ Func HandleTableRow($oRow)
 
     ; Sent "CTRL+P" to print
     Send('^p')
-
+    
     ; Call PrintPdf()
     Local $printSuccess = PrintPdf($faxNumber)
 
