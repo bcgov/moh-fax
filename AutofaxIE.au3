@@ -65,6 +65,8 @@ Func HandleTableRow($oRow)
 
     _FileWriteLog($hLogFile, "Process fax to number " & $faxNumber)		;	would be nice to add here the case number
     
+    ProcessClose("Acrobat.exe")
+    ProcessClose("AcroCEF.exe")
     ProcessClose("AdobeARM.exe")
 
     ; Get ref to PDF link in row and click
