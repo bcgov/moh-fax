@@ -145,8 +145,8 @@ Func PrintPdf($faxNumber)
 
     ; Enter $faxNumber on "To" field.
 	Send($faxNumber)
-	;~ Send("{TAB}")	; enter TAB three times to advance to the correct field for next entry
-	
+	Send("{TAB}")
+    
     ; Click "Send" on page.
 	ClickLink("Send")
 	Sleep(1000)
