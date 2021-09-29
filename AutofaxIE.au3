@@ -145,9 +145,8 @@ Func PrintPdf($faxNumber)
 
     ; Enter $faxNumber on "To" field.
 	Send($faxNumber)
-	Send("{TAB 3}")	; enter TAB three times to advance to the correct field for next entry
-	Send("Notification From Ministry of Health - Special Authority Program")	;	add text to Subject line
-
+	;~ Send("{TAB}")	; enter TAB three times to advance to the correct field for next entry
+	
     ; Click "Send" on page.
 	ClickLink("Send")
 	Sleep(1000)
