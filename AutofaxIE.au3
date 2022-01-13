@@ -68,6 +68,7 @@ Func HandleTableRow($oRow)
     ProcessClose("Acrobat.exe")
     ProcessClose("AcroCEF.exe")
     ProcessClose("AdobeARM.exe")
+    ProcessClose("AcroRd32.exe")
 
     ; Get ref to PDF link in row and click
     Local $oPdfLink = _IETagNameGetCollection($oRow, 'a', 0)
