@@ -38,16 +38,17 @@ WinWaitActive("Autofax")
 Sleep(200)
 WinActivate("Autofax")
 
-Local $oCaseList = _IEGetObjById($oIE, 'caseList') ; Get reference to the HTML table.
-Local $oRows = _IETagNameGetCollection($oCaseList, 'tr') ; Get list of refs to each table row.
+Do
+    HandleTable($oIE)
 
-For $oRow In $oRows
-    WinActivate("Autofax")
-	HandleTableRow($oRow)
-Next
+    _FileWriteLog($hLogFile, "Page finish. Refreshing list.")
+    _IEAction($oIE, "refresh")
+    Sleep(5000)
+
+    _IEGetObjById($oIE, 'caseList')
+Until @error <> 0
 
 WinClose("Autofax")
-
 _FileWriteLog($hLogFile, "All faxes were processed. Closing")
 
 ; Close the log file
@@ -57,6 +58,16 @@ FileSetAttrib($sLogFileLocation,"-RASHNOT")
 FileSetAttrib($sLogFileLocation,"+R")
 
 ; End Script
+
+Func HandleTable($oIE) 
+    Local $oCaseList = _IEGetObjById($oIE, 'caseList') ; Get reference to the HTML table.
+    Local $oRows = _IETagNameGetCollection($oCaseList, 'tr') ; Get list of refs to each table row.
+
+    For $oRow In $oRows
+        WinActivate("Autofax")
+        HandleTableRow($oRow)
+    Next
+EndFunc
 
 Func HandleTableRow($oRow)
     ; Get ref to input element containing the fax number.
