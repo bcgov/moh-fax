@@ -1,0 +1,12 @@
+{
+    "webServer":{
+        "protocol":"http",
+        "host":"localhost",
+        "port":8080
+    },
+    "loc":{
+        "path":"C:\\Users\\afree\\Documents\\files_network"
+
+    }
+
+}
