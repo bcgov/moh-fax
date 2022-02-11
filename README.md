@@ -28,8 +28,8 @@ If the installation was successful, you should be able to run the following comm
 Clone the repo and install the dependencies.
 
 ```bash
-git clone https://github.com/contentful/the-example-app.nodejs.git
-cd the-example-app.nodejs
+git clone https://github.com/bcgov/moh-fax.git
+cd moh-fax
 ```
 
 ```bash
