@@ -9,7 +9,7 @@ function exec(caseNumber,recepeintName,faxNumber,attachment)
     {
         attachment =caseNumber+'.pdf';
     }
-    let text=`#RECIPIENT \n`;
+    let text=`#SENDER_EMAIL sa@hlth.gov.bc.ca \n`;
     text+=`#RECIP_NAME ${recepeintName}\n`;
     text+=`#DESTINATION FAX ${faxNumber}\n`;
     text+=`#ATTACHMENT ${caseNumber}.pdf`;
