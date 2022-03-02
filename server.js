@@ -21,14 +21,19 @@ const server = http.createServer(options,(req, res) => {
     });
 
     req.on('end', () => {
-      var parsedBody =JSON.parse(body);
+      var parsedBody = JSON.parse(body);
   
-    sf2fsc.exec(parsedBody.caseNumber,parsedBody.recipientName,parsedBody.faxNumber,parsedBody.attachment);
-      res.end('ok');
+      let result=sf2fsc.exec(parsedBody);
+      if(result!=null) {
+        res.end(JSON.stringify(result));
+      }
+      else{
+        res.end();
+      }   
     });
   }
-    else {
-      res.end();
-    }
+  else {
+    res.end();
+  }
 });
 server.listen(`${PORT}`);
