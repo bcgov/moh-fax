@@ -4,45 +4,44 @@ const config=require('config')
 const dir=config.get("loc.path");
 
 function exec(items) {
+   
     var result=[];
-    var successResultObject={"status":"success","status_code":"200"};
+    var successResultObject={"status":"success"};
     var failResultObject={"status":"fail","error":"Invalid Parameter"};
 
-    if(items.length==0){   
-
+    if(!items || items.length==0){   
         result.push(failResultObject);
         return result;
     }
-    for(i=0;i<items.length;i++){
-        
-        let cases=items[i].caseNumber;
-        let name=items[i].recepeintName;
-        let fax=items[i].faxNumber;
-        let attachment=items[i].attachment;
 
-        if(cases===null||name===null||fax===null||attachment===null||cases.length===0||name.length===0||fax.length===0||attachment.length===0){                  
+    for(let i=0; i<items.length; i++){    
+        let item = items[i];
+        let caseNumber = item.caseNumber;
+        let name = item.recepientName;
+        let fax = item.faxNumber;
+        let attachment = item.attachment;
+        let emails = item.emails;
+
+        if( !caseNumber || !name || !fax || !attachment || !emails || emails.length == 1) {
             result.push(failResultObject);
         }
-    
         else {
-            execs(items[i].caseNumber,items[i].recepeintName,items[i].faxNumber,items[i].attachment);      
+            execs(item.caseNumber,item.recepeintName,item.faxNumber,item.attachment, item.emails);      
             result.push(successResultObject);
         }
     }
     return result;
 }
 
-function execs(caseNumber,recepeintName,faxNumber,attachment)
-{
-    if(attachment==null)
-    {
-        attachment =caseNumber+'.pdf';
-    }
-    let text=`#SENDER_EMAIL sa@hlth.gov.bc.ca \n`;
+function execs(caseNumber,recepeintName,faxNumber,attachment,emails) {
+    
+    let text=`#SENDER_EMAIL sa@hlth.gov.bc.ca\n`;
     text+=`#RECIP_NAME ${recepeintName}\n`;
     text+=`#DESTINATION FAX ${faxNumber}\n`;
-    text+=`#ATTACHMENT ${caseNumber}.pdf`;
-
+    text+=`#ATTACHMENT ${caseNumber}.pdf \n`;
+    text+= `#NOTIFY ALL EMAIL ${emails}`;
+    
+    
     fs.writeFileSync(path.join(`${dir}`,caseNumber+'.pdf'),attachment,'base64',function(err){console.log(err);});
     fs.writeFileSync(path.join(`${dir}`,caseNumber+'.control'),text,'',function(err){console.log(err);});
 

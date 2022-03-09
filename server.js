@@ -14,25 +14,39 @@ const options = {
   }
 };
 const server = http.createServer(options,(req, res) => {
-  if (req.method === 'POST'&& req.url==='/SA/sf2fsc') {
+  if (req.method === 'POST' && req.url.toLocaleLowerCase() ==='/SA/sf2fsc'.toLocaleLowerCase()) {
     let body = '';
+
     req.on('data', chunk => {
         body += chunk.toString(); // convert Buffer to string
     });
 
     req.on('end', () => {
       var parsedBody = JSON.parse(body);
-  
-      let result=sf2fsc.exec(parsedBody);
-      if(result!=null) {
-        res.end(JSON.stringify(result));
+      let results;
+
+      try {
+        results = sf2fsc.exec(parsedBody);      
+        body = JSON.stringify(results);
+      } catch(error) {
+        res.statusCode = 500;
+        body = `Server error: ${error}`; 
       }
-      else{
-        res.end();
-      }   
+      
+      // Check for validation errors.
+      if(results && results.length>0) { 
+      for (let i = 0; i < results.length; i++) {
+        if ('success' != results[i].status.toLowerCase()) {
+          res.statusCode = 400;
+        }
+      }
+    }
+      
+      res.end(body);
     });
   }
   else {
+    res.statusCode = 404;
     res.end();
   }
 });
