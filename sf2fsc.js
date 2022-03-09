@@ -22,11 +22,11 @@ function exec(items) {
         let attachment = item.attachment;
         let emails = item.emails;
 
-        if( !caseNumber || !name || !fax || !attachment || !emails || emails.length == 1) {
+        if( !caseNumber || !name || !fax || !attachment || !emails || emails.length == 0) {
             result.push(failResultObject);
         }
         else {
-            execs(item.caseNumber,item.recepeintName,item.faxNumber,item.attachment, item.emails);      
+            execs(item.caseNumber,item.recepeintName,item.faxNumber,item.attachment, item.emails.join(','));      
             result.push(successResultObject);
         }
     }
