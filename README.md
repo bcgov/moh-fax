@@ -24,7 +24,7 @@ If the installation was successful, you should be able to run the following comm
     6.14.3
 
 
-## Setup
+## Setup for First time Users
 Clone the repo and install the dependencies.
 
 ```bash
@@ -40,16 +40,14 @@ npm install
 * Change PORT in config file as per preferred port number.
 * Change Path in config to the location where pdf and control files are supposed to be saved.
 
-
-## Running the Project
+## Running the Project Locally
 ```
-$ npm start
+# To start..
+npm start
 ```
-This starts the server in background in listening mode on port configured in config file.
-
 ## API
 
-### Request in Windows
+### Request in Windows 
 
 `POST /SA/sf2fsc`
 
@@ -61,7 +59,9 @@ This starts the server in background in listening mode on port configured in con
         "caseNumber":"00001098",
         "recipientName":"John",
         "faxNumber":"6044345984",
-        "attachment":"base64 of the pdf"
+        "attachment":"base64 of the pdf",
+        "emails":["test9@outlook.com"],
+        "caseId":"5001f000002yAR0AAM"
     }
 
 ### Response
@@ -77,4 +77,34 @@ This starts the server in background in listening mode on port configured in con
 
 ### Response
     200 OK
+
+## Running the Project on BC Servers
+```
+ssh <idir>@fireblade.hlth.gov.bc.ca # enter your IDIR
+
+sudo -u gfadmin /bin/bash -login # enter your IDIR
+
+# app is located here:
+/data/gfadmin/software/nodejs/apps/moh-fax/moh-fax-main
+
+# To start..
+npm start
+```
+This starts the server in background in listening mode on port configured in config file.
+
+## Running Service in the Background
+```
+#Login using IDIR Credentials(Needs Approval and access to Fireblade)
+ssh <idir>@fireblade.hlth.gov.bc.ca # enter your IDIR
+
+# Start the service
+sudo systemctl start filescan_nodejs
+
+# Stop the service
+sudo systemctl stop filescan_nodejs
+
+# Check status
+systemctl status filescan_nodejs 
+```
+
 
